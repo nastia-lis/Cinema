@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cinema</string>
+    <string name="movie_1">Movie 1</string>
+    <string name="movie_2">Movie 2</string>
+    <string name="movie_3">Movie 3</string>
+    <string name="movie_4">Movie 4</string>
+    <string name="movie_5">Movie 5</string>
+    <string name="movie_6">Movie 6</string>
+    <string name="movie_7">Movie 7</string>
+    <string name="movie_8">Movie 8</string>
+    <string name="movie_9">Movie 9</string>
+</resources>

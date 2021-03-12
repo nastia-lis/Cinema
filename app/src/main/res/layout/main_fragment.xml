@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding">
+
+        <Button
+            android:id="@+id/movie_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/movie_1"/>
+
+        <Button
+            android:id="@+id/movie_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_2"
+            app:layout_constraintEnd_toStartOf="@+id/movie_3"
+            app:layout_constraintStart_toEndOf="@+id/movie_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/movie_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movie_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/movie_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_1" />
+
+        <Button
+            android:id="@+id/movie_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_5"
+            app:layout_constraintEnd_toStartOf="@+id/movie_6"
+            app:layout_constraintStart_toEndOf="@+id/movie_4"
+            app:layout_constraintTop_toBottomOf="@+id/movie_2" />
+
+        <Button
+            android:id="@+id/movie_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/movie_5"
+            app:layout_constraintTop_toBottomOf="@+id/movie_3" />
+
+        <Button
+            android:id="@+id/movie_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_4" />
+
+        <Button
+            android:id="@+id/movie_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_8"
+            app:layout_constraintEnd_toStartOf="@+id/movie_9"
+            app:layout_constraintStart_toEndOf="@+id/movie_7"
+            app:layout_constraintTop_toBottomOf="@+id/movie_5" />
+
+        <Button
+            android:id="@+id/movie_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding"
+            android:text="@string/movie_9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/movie_8"
+            app:layout_constraintTop_toBottomOf="@+id/movie_6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+</FrameLayout>
