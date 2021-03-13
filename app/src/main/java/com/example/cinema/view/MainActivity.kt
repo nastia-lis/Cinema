@@ -1,9 +1,9 @@
-package com.example.cinema
+package com.example.cinema.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cinema.R
 import com.example.cinema.databinding.MainActivityBinding
-import com.example.cinema.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
