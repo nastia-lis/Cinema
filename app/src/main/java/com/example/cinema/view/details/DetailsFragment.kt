@@ -1,4 +1,4 @@
-package com.example.cinema.view
+package com.example.cinema.view.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,26 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.cinema.databinding.FragmentDetailsBinding
 import com.example.cinema.viewmodel.AppState
-import com.example.cinema.databinding.MainFragmentBinding
 import com.example.cinema.model.Movie
 import com.example.cinema.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.fragment_details.*
 
-class MainFragment : Fragment() {
-    private var _binding: MainFragmentBinding? = null
+class DetailsFragment : Fragment() {
+    /*private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = DetailsFragment()
     }
 
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -65,5 +65,5 @@ class MainFragment : Fragment() {
 
     private fun setData(movieData: Movie) {
         movie_1.text = movieData.cinema.movie
-    }
+    }*/
 }
