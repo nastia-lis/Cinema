@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinema.databinding.FragmentMainRecyclerItemBinding
 import com.example.cinema.model.Movie
 
-class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
+class MainFragmentAdapter(private var onItemViewClickListener: FragmentMain.OnItemViewClickListener?) : RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
 
     private lateinit var binding: FragmentMainRecyclerItemBinding
 
@@ -41,11 +41,12 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.MainViewHol
             binding.rating.text =
                 movie.cinema.rating.toString()
             binding.itemContainer.setOnClickListener {
-                Toast.makeText(
-                    itemView.context, movie.cinema.movie,
-                    Toast.LENGTH_LONG
-                ).show()
+                onItemViewClickListener?.onItemViewClick(movie)
             }
         }
+    }
+
+    fun removeListener() {
+        onItemViewClickListener = null
     }
 }

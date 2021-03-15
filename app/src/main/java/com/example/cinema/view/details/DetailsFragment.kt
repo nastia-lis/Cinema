@@ -5,30 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.cinema.databinding.FragmentDetailsBinding
-import com.example.cinema.viewmodel.AppState
 import com.example.cinema.model.Movie
-import com.example.cinema.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.fragment_main_recycler_item.*
+import kotlinx.android.synthetic.main.fragment_main_recycler_item.nameMovie
+import kotlinx.android.synthetic.main.fragment_main_recycler_item.rating
+import kotlinx.android.synthetic.main.fragment_main_recycler_item.released
 
 class DetailsFragment : Fragment() {
-    /*private var _binding: FragmentDetailsBinding? = null
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance() = DetailsFragment()
-    }
+        const val BUNDLE_EXTRA = "movie"
 
-    private lateinit var viewModel: MainViewModel
+        fun newInstance(bundle: Bundle) : DetailsFragment {
+            val fragment = DetailsFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -36,34 +38,15 @@ class DetailsFragment : Fragment() {
         _binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it as AppState) })
-        viewModel.getMovie()
-    }
-
-    private fun renderData(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                val movieData = appState.movieData
-                loading.visibility = View.GONE
-                setData(movieData)
-            }
-            is AppState.Loading -> {
-                loading.visibility = View.VISIBLE
-            }
-            is AppState.Error -> {
-                loading.visibility = View.GONE
-                Snackbar
-                    .make(main, "Error", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") { viewModel.getMovie() }
-                    .show()
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
+        if (movie != null) {
+            val cinema = movie.cinema
+            nameMovie.text = cinema.movie
+            released.text = cinema.released.toString()
+            rating.text = cinema.rating.toString()
+            description.text = movie.description
         }
     }
-
-    private fun setData(movieData: Movie) {
-        movie_1.text = movieData.cinema.movie
-    }*/
 }

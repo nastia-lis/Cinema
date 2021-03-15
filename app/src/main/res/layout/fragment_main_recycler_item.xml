@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageMovie"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/image_fragment_width"
+        android:layout_height="@dimen/image_fragment_height"
         android:background="@drawable/movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,8 +18,8 @@
     android:id="@+id/nameMovie"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:textSize="25sp"
+    android:padding="@dimen/padding_item"
+    android:textSize="@dimen/text_size_big"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/imageMovie"
     tools:text="Name Movie" />
@@ -28,8 +28,8 @@
         android:id="@+id/released"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="15sp"
+        android:padding="@dimen/padding_item"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameMovie"
         tools:text="2000" />
@@ -38,8 +38,8 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="15sp"
+        android:padding="@dimen/padding_item"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameMovie"
         tools:text="5.0" />

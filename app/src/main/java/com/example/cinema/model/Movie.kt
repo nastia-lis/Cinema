@@ -1,9 +1,13 @@
 package com.example.cinema.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
     val cinema: Cinema = getDefaultCinema(),
-    val description: String = ""
-)
+    val description: String = "Description"
+) : Parcelable
 
 fun getDefaultCinema() = Cinema("Name", 2020, 5.8)
 
