@@ -18,7 +18,12 @@ private val repository: Repository = RepositoryImpl()) : ViewModel() {
         liveData.value = AppState.Loading
         Thread {
             sleep(1000)
-            liveData.postValue(AppState.Success(repository.getMovieFromServer()))
+            liveData.postValue(
+                AppState.Success(
+                        repository.getMovieFromLocalFantastic(),
+                        repository.getMovieFromLocalComedy()
+                )
+            )
         }.start()
     }
 }
