@@ -34,14 +34,16 @@ class MainFragmentAdapter(private var onItemViewClickListener: FragmentMain.OnIt
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) {
-            binding.nameMovie.text =
-                movie.cinema.movie
-            binding.released.text =
-                movie.cinema.released.toString()
-            binding.rating.text =
-                movie.cinema.rating.toString()
-            binding.itemContainer.setOnClickListener {
-                onItemViewClickListener?.onItemViewClick(movie)
+            binding.apply {
+                nameMovie.text =
+                    movie.cinema.movie
+                released.text =
+                    movie.cinema.released.toString()
+                rating.text =
+                    movie.cinema.rating.toString()
+                itemContainer.setOnClickListener {
+                    onItemViewClickListener?.onItemViewClick(movie)
+                }
             }
         }
     }
