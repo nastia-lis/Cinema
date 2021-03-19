@@ -36,7 +36,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: FragmentMain.OnIt
         fun bind(movie: Movie) {
             binding.apply {
                 nameMovie.text =
-                    movie.cinema.movie
+                    movie.cinema.title
                 released.text =
                     movie.cinema.released.toString()
                 rating.text =
