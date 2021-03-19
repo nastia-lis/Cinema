@@ -19,7 +19,7 @@ class MovieLoader(private val listener: MovieLoaderListener, private val id: Int
     fun loadMovie() {
         try {
             val uri =
-                URL("https://api.themoviedb.org/3/movie/${id}?api_key=<<ba94ef13c60c86a4f3cc51f6e1cb74b5>>")
+                URL("https://api.tmdb.org/3/movie/${id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")
             val handler = Handler()
             Thread(Runnable {
                 lateinit var urlConnection: HttpsURLConnection

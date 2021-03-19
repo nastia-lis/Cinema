@@ -83,6 +83,7 @@ class DetailsFragment : Fragment() {
             loading.visibility = View.GONE
             nameMovie.text = movieDTO.title
             released.text = movieDTO.release_date
+            rating.text = movieDTO.vote_average.toString()
             description.text = movieDTO.overview
         }
     }
