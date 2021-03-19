@@ -40,13 +40,13 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
-        if (movie != null) {
-            val cinema = movie.cinema
-            nameMovie.text = cinema.movie
-            released.text = cinema.released.toString()
-            rating.text = cinema.rating.toString()
-            description.text = movie.description
+        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
+            movie.cinema.also { cinema ->
+                nameMovie.text = cinema.movie
+                released.text = cinema.released.toString()
+                rating.text = cinema.rating.toString()
+                description.text = movie.description
+            }
         }
     }
 }
