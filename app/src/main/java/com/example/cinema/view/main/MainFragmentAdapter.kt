@@ -3,12 +3,11 @@ package com.example.cinema.view.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinema.databinding.FragmentMainRecyclerItemBinding
 import com.example.cinema.model.Movie
 
-class MainFragmentAdapter(private var onItemViewClickListener: FragmentMain.OnItemViewClickListener?) : RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
+class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) : RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
 
     private lateinit var binding: FragmentMainRecyclerItemBinding
 

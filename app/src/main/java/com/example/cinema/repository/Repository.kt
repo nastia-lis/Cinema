@@ -1,4 +1,6 @@
-package com.example.cinema.model
+package com.example.cinema.repository
+
+import com.example.cinema.model.Movie
 
 interface Repository {
     fun getMovieFromServer(): Movie

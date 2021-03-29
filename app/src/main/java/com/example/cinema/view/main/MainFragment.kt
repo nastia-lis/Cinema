@@ -15,9 +15,8 @@ import com.example.cinema.viewmodel.AppState
 import com.example.cinema.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.main_activity.view.*
 
-class FragmentMain : Fragment() {
+class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -92,7 +91,7 @@ class FragmentMain : Fragment() {
     }
 
     companion object {
-        fun newInstance() = FragmentMain()
+        fun newInstance() = MainFragment()
     }
 
     interface OnItemViewClickListener {

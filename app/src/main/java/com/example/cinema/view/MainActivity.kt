@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cinema.R
 import com.example.cinema.databinding.MainActivityBinding
-import com.example.cinema.view.main.FragmentMain
+import com.example.cinema.view.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, FragmentMain.newInstance())
+                    .replace(R.id.container, MainFragment.newInstance())
                     .commitNow()
         }
     }

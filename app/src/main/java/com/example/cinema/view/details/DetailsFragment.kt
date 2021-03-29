@@ -8,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.cinema.databinding.FragmentDetailsBinding
 import com.example.cinema.model.MovieDTO
 import com.example.cinema.model.Movie
+import com.example.cinema.utils.showSnackBar
 import com.example.cinema.viewmodel.AppState
+import com.example.cinema.viewmodel.DetailsViewModel
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_main_recycler_item.nameMovie
@@ -26,6 +30,10 @@ class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var movieBundle: Movie
+
+    private val viewModel: DetailsViewModel by lazy {
+        ViewModelProvider(this).get(DetailsViewModel::class.java)
+    }
 
     companion object {
         const val BUNDLE_EXTRA = "movie"
@@ -54,48 +62,34 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: Movie()
-        getMovie()
+        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.getMovieFromRemoteSource("https://api.tmdb.org/3/movie/${movieBundle.cinema.id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")
     }
 
-    private fun getMovie() {
-        fragmentDescription.visibility = View.GONE
-        loading.visibility = View.VISIBLE
-
-        val client = OkHttpClient()
-        val builder: Request.Builder = Request.Builder()
-        builder.url("https://api.tmdb.org/3/movie/${movieBundle.cinema.id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")
-        val request: Request = builder.build()
-        val call: Call = client.newCall(request)
-        call.enqueue(object : Callback {
-            val handler: Handler = Handler()
-            @Throws(IOException::class)
-            override fun onResponse(call: Call?, response: Response) {
-                val serverResponse: String? = response.body()?.string()
-                if (response.isSuccessful && serverResponse != null) {
-                    handler.post {
-                        renderData(Gson().fromJson(serverResponse, MovieDTO::class.java))
-                    }
-                } else {
-                    AppState.Error(Throwable("Error Server"))
-                }
+    private fun renderData(appState: AppState) {
+        when(appState) {
+            is AppState.Success -> {
+                fragmentDescription.visibility = View.VISIBLE
+                loading.visibility = View.GONE
+                setMovie(appState.movieFantastic[0])
             }
-            override fun onFailure(call: Call?, e: IOException?) {
-                AppState.Error(Throwable("Error Server"))
+            is AppState.Loading -> {
+                fragmentDescription.visibility = View.GONE
+                loading.visibility = View.VISIBLE
             }
-        })
-    }
-
-    private fun renderData(movieDTO: MovieDTO) {
-        fragmentDescription.visibility = View.VISIBLE
-        loading.visibility = View.GONE
-
-        if (movieDTO.title.isNullOrEmpty() || movieDTO.release_date.isNullOrEmpty() || movieDTO.vote_average == null || movieDTO.overview.isNullOrEmpty()) {
-            AppState.Error(Throwable("Error Server"))
-        } else {
-            nameMovie.text = movieDTO.title
-            released.text = movieDTO.release_date
-            rating.text = movieDTO.vote_average.toString()
-            description.text = movieDTO.overview
+            is AppState.Error-> {
+                fragmentDescription.visibility = View.VISIBLE
+                loading.visibility = View.GONE
+                fragmentDescription.showSnackBar("Error", "Reload", {viewModel.getMovieFromRemoteSource("https://api.tmdb.org/3/movie/${movieBundle.cinema.id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")})
+            }
         }
+    }
+
+    private fun setMovie(movieDTO: Movie) {
+        val movie = movieDTO.cinema
+        nameMovie.text = movie.movie
+        released.text = movie.released
+        rating.text = movie.rating.toString()
+        description.text = movieDTO.description
     }
 }
