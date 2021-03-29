@@ -17,6 +17,7 @@ import com.example.cinema.utils.showSnackBar
 import com.example.cinema.viewmodel.AppState
 import com.example.cinema.viewmodel.DetailsViewModel
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_main_recycler_item.nameMovie
 import kotlinx.android.synthetic.main.fragment_main_recycler_item.rating
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_main_recycler_item.released
 import okhttp3.*
 import java.io.IOException
 import kotlin.jvm.Throws
+
+private const val imagePath: String = "https://image.tmdb.org/t/p/w500"
 
 class DetailsFragment : Fragment() {
 
@@ -91,5 +94,10 @@ class DetailsFragment : Fragment() {
         released.text = movie.released
         rating.text = movie.rating.toString()
         description.text = movieDTO.description
+
+        Picasso
+            .get()
+            .load(imagePath + movieDTO.image)
+            .into(imageMovie)
     }
 }

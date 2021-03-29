@@ -5,5 +5,5 @@ import com.example.cinema.model.Movie
 import com.example.cinema.model.MovieDTO
 
 fun convertDtoToModel(movieDTO: MovieDTO): List<Movie> {
-    return listOf(Movie(Cinema(movieDTO.title!!, movieDTO.release_date!!, movieDTO.vote_average!!, movieDTO.id!!), movieDTO.overview!!))
+    return listOf(Movie(Cinema(movieDTO.title!!, movieDTO.release_date!!, movieDTO.vote_average!!, movieDTO.id!!), movieDTO.poster_path!!, movieDTO.overview!!))
 }

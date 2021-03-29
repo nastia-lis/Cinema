@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Movie(
     val cinema: Cinema = getDefaultCinema(),
+    val image: String = "C:\\Users\\lomov\\StudioProjects\\CinemaTest\\app\\src\\main\\res\\drawable\\movie.jpg",
     val description: String = "Description"
 ) : Parcelable
 

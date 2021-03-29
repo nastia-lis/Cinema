@@ -5,5 +5,6 @@ data class MovieDTO(
     val release_date: String?,
     val vote_average: Double?,
     val id: Int?,
-    val overview: String?
+    val overview: String?,
+    val poster_path: String?
 )

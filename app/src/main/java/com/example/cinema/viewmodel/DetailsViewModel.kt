@@ -39,7 +39,7 @@ private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(Rem
     }
 
     private fun checkResponse(movieDTO: MovieDTO): AppState {
-        return if (movieDTO.title.isNullOrEmpty() || movieDTO.release_date.isNullOrEmpty() || movieDTO.vote_average == null || movieDTO.overview.isNullOrEmpty()) {
+        return if (movieDTO.title.isNullOrEmpty() || movieDTO.release_date.isNullOrEmpty() || movieDTO.vote_average == null || movieDTO.overview.isNullOrEmpty() || movieDTO.poster_path.isNullOrEmpty()) {
             AppState.Error(Throwable("Error Server"))
         } else {
             AppState.Success(convertDtoToModel(movieDTO), convertDtoToModel(movieDTO))
