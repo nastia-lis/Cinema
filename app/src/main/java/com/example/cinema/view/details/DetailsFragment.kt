@@ -62,8 +62,8 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: Movie()
-        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
-        viewModel.getMovieFromRemoteSource("https://api.tmdb.org/3/movie/${movieBundle.cinema.id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")
+        viewModel.detailsLiveData.observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.getMovieFromRemoteSource(movieBundle.cinema.id)
     }
 
     private fun renderData(appState: AppState) {
@@ -80,7 +80,7 @@ class DetailsFragment : Fragment() {
             is AppState.Error-> {
                 fragmentDescription.visibility = View.VISIBLE
                 loading.visibility = View.GONE
-                fragmentDescription.showSnackBar("Error", "Reload", {viewModel.getMovieFromRemoteSource("https://api.tmdb.org/3/movie/${movieBundle.cinema.id}?api_key=ba94ef13c60c86a4f3cc51f6e1cb74b5")})
+                fragmentDescription.showSnackBar("Error", "Reload", {viewModel.getMovieFromRemoteSource(movieBundle.cinema.id)})
             }
         }
     }

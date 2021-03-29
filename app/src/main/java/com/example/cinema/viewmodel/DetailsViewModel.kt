@@ -7,28 +7,23 @@ import com.example.cinema.repository.DetailsRepository
 import com.example.cinema.repository.DetailsRepositoryImpl
 import com.example.cinema.utils.convertDtoToModel
 import com.example.cinema.repository.RemoteDataSource
-import com.google.gson.Gson
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
-import kotlin.jvm.Throws
 
-class DetailsViewModel(private val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
+class DetailsViewModel(val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
 private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource())
  ) : ViewModel() {
 
-     fun getLiveData() = detailsLiveData
-
-    fun getMovieFromRemoteSource(requestLink: String) {
+    fun getMovieFromRemoteSource(id: Int) {
         detailsLiveData.value = AppState.Loading
-        detailsRepositoryImpl.getMovieDetailsFromServer(requestLink, callback)
+        detailsRepositoryImpl.getMovieDetailsFromServer(id, callback)
     }
 
-    private val callback = object : Callback {
-        @Throws(IOException::class)
-        override fun onResponse(call: Call?, response: Response) {
-            val serverResponse: String? = response.body()?.string()
+    private val callback = object : retrofit2.Callback<MovieDTO> {
+
+        override fun onResponse(
+            call: retrofit2.Call<MovieDTO>,
+            response: retrofit2.Response<MovieDTO>
+        ) {
+            val serverResponse: MovieDTO? = response.body()
             detailsLiveData.postValue(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
@@ -37,13 +32,13 @@ private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(Rem
                 }
             )
         }
-        override fun onFailure(call: Call?, e: IOException?) {
-            detailsLiveData.postValue(AppState.Error(Throwable(e?.message ?: "Error Server")))
+
+        override fun onFailure(call: retrofit2.Call<MovieDTO>, t: Throwable) {
+            detailsLiveData.postValue(AppState.Error(Throwable(t.message ?: "Error Server")))
         }
     }
 
-    private fun checkResponse(serverResponse: String): AppState {
-        val movieDTO: MovieDTO = Gson().fromJson(serverResponse, MovieDTO::class.java)
+    private fun checkResponse(movieDTO: MovieDTO): AppState {
         return if (movieDTO.title.isNullOrEmpty() || movieDTO.release_date.isNullOrEmpty() || movieDTO.vote_average == null || movieDTO.overview.isNullOrEmpty()) {
             AppState.Error(Throwable("Error Server"))
         } else {
